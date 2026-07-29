@@ -1,5 +1,7 @@
 # Microsoft 365 Identity & Endpoint Administration Lab
 
+[![PowerShell syntax validation](https://github.com/isaacyanney/microsoft-365-identity-lab/actions/workflows/powershell-syntax.yml/badge.svg)](https://github.com/isaacyanney/microsoft-365-identity-lab/actions/workflows/powershell-syntax.yml)
+
 A portfolio lab for the operational design behind Microsoft 365, Entra ID and Intune administration. It demonstrates identity lifecycle planning, least-privilege access, Conditional Access rollout, endpoint compliance and reviewable PowerShell automation.
 
 ## Scope and evidence boundary
