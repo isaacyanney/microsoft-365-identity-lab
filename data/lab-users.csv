@@ -1,0 +1,6 @@
+EmployeeId,DisplayName,UserPrincipalName,Department,Role,Manager,LicenseProfile,AccessProfile,Status
+LAB-001,Amina Boateng,amina.boateng@contoso.example,Finance,Finance Analyst,maria.klein@contoso.example,M365-Business-Premium,Finance-Standard,Joiner
+LAB-002,Jonas Weber,jonas.weber@contoso.example,Operations,Operations Coordinator,lena.hoffmann@contoso.example,M365-Business-Premium,Operations-Standard,Mover
+LAB-003,Sofia Mensah,sofia.mensah@contoso.example,Sales,Account Executive,daniel.schmidt@contoso.example,M365-Business-Standard,Sales-Standard,Active
+LAB-004,Leon Fischer,leon.fischer@contoso.example,IT,Support Technician,isaac.admin@contoso.example,M365-Business-Premium,IT-Support,Joiner
+LAB-005,Maya Owusu,maya.owusu@contoso.example,People,People Coordinator,sarah.becker@contoso.example,M365-Business-Premium,People-Standard,Leaver
