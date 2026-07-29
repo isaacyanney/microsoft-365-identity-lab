@@ -1,0 +1,24 @@
+{
+  "SchemaVersion": "1.0",
+  "Environment": "Synthetic lab",
+  "ContainsTenantChanges": false,
+  "RecordCount": 1,
+  "ReadyForReview": 1,
+  "Plans": [
+    {
+      "EmployeeId": "LAB-101",
+      "UserPrincipalName": "amina.boateng@contoso.example",
+      "ChangeType": "Joiner",
+      "ApprovalState": "Pending",
+      "ValidationPassed": true,
+      "ValidationMessages": [],
+      "PlannedActions": [
+        "Create cloud identity",
+        "Assign license profile: M365-Business-Premium",
+        "Assign access profile: Finance-Standard",
+        "Require MFA registration",
+        "Record manager approval"
+      ]
+    }
+  ]
+}
