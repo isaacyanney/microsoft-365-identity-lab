@@ -4,10 +4,14 @@ on:
   push:
     paths:
       - "**/*.ps1"
+      - "data/**/*.csv"
+      - "sample-output/**/*.json"
       - ".github/workflows/powershell-syntax.yml"
   pull_request:
     paths:
       - "**/*.ps1"
+      - "data/**/*.csv"
+      - "sample-output/**/*.json"
       - ".github/workflows/powershell-syntax.yml"
 
 permissions:
@@ -53,3 +57,29 @@ jobs:
           $configuration.Output.Verbosity = "Detailed"
           $result = Invoke-Pester -Configuration $configuration
           if ($result.FailedCount -gt 0) { exit 1 }
+
+      - name: Validate synthetic evidence files
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path sample-output -Filter *.json | ForEach-Object {
+            $sample = Get-Content -Raw $_.FullName | ConvertFrom-Json
+            if ($sample.Environment -ne "Synthetic lab") {
+              throw "Sample must identify the synthetic environment: $($_.FullName)"
+            }
+            if ($sample.ContainsTenantChanges -ne $false) {
+              throw "Sample must confirm that no tenant changes occurred: $($_.FullName)"
+            }
+            Write-Host "Synthetic JSON OK: $($_.FullName)"
+          }
+
+          $required = @("EmployeeId","DisplayName","UserPrincipalName","Department","Role","Manager","LicenseProfile","AccessProfile","Status")
+          Get-ChildItem -Path data -Filter *.csv | ForEach-Object {
+            $rows = @(Import-Csv $_.FullName)
+            if ($rows.Count -eq 0) { throw "CSV contains no records: $($_.FullName)" }
+            $missing = @($required | Where-Object { $_ -notin $rows[0].PSObject.Properties.Name })
+            if ($missing.Count -gt 0) { throw "CSV missing columns: $($missing -join ', ')" }
+            if (@($rows | Where-Object { $_.UserPrincipalName -notlike "*.example" }).Count -gt 0) {
+              throw "CSV contains a non-example UPN: $($_.FullName)"
+            }
+            Write-Host "Synthetic CSV OK: $($_.FullName)"
+          }

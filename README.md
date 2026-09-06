@@ -53,13 +53,16 @@ The script validates each record and produces reviewable joiner, mover, leaver o
 
 ## Automated validation
 
-GitHub Actions parses every PowerShell file and runs Pester tests that verify:
+GitHub Actions parses every PowerShell file, runs Pester tests and validates the synthetic JSON and CSV evidence. The checks verify:
 
 - valid joiners produce reviewable plans with MFA registration;
 - invalid status, UPN and manager data are rejected;
 - leaver actions preserve approval and retention controls;
 - missing input columns fail safely;
-- generated reports explicitly state that no tenant changes occurred.
+- generated reports explicitly state that no tenant changes occurred;
+- published evidence files use the synthetic environment and reserved `.example` identities.
+
+**Current evidence status:** public source, behavioural tests, synthetic inputs and outputs, and automated validation are available for review. Tenant screenshots and live execution evidence are intentionally not claimed.
 
 ## Administrative workflow
 
